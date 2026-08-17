@@ -6,15 +6,18 @@ Read the target script (named as an argument, for example `scripts/rag-evals.md`
 derive its slug from the filename.
 
 1. **Wave 0** (do this yourself, do not spawn a subagent): create `artifacts/<slug>/`
-   and its subfolders (`diagrams/source/`, `diagrams/generated/`, `linkedin/`). Read
-   the script and write `artifacts/<slug>/brief.md` with the core problem, audience,
-   key takeaways, case studies, and data points.
+   and its subfolders (`diagrams/source/`, `diagrams/generated/`, `linkedin/`,
+   `vertical-lift/`). Read the script and write `artifacts/<slug>/brief.md` with the
+   core problem, audience, key takeaways, case studies, data points, and any
+   top-of-script metadata (runtime target, thumbnail template, cross-links to other
+   parts). Note whether a trailing `Vertical lift — <label>` block is present.
 
-2. **Wave 1**: spawn three subagents using the Task tool. Dispatch all three Task
+2. **Wave 1**: spawn four subagents using the Task tool. Dispatch all four Task
    calls in one message so they run in parallel, not one after another:
    - one runs the `teleprompter` skill
    - one runs the `diagrams` skill
    - one runs `youtube-meta` pass 1 only
+   - one runs the `vertical-lift` skill, only if brief.md noted a Vertical lift block
 
 3. **Wave 2**: once the diagrams manifest exists, spawn two subagents in parallel
    (again, both Task calls in the same message):
@@ -34,8 +37,8 @@ Rules:
 - Do not run `youtube-meta` pass 2 (post-recording). That only runs when explicitly
   triggered after recording.
 - If "run everything fully parallel" is said instead, skip the wave dependencies:
-  spawn all six generation subagents (teleprompter, diagrams, youtube-meta pass 1,
-  newsletter, launch-post, linkedin-posts) in one batch, and tell the newsletter and
-  linkedin-posts agents to derive from `brief.md` directly instead of waiting on the
-  diagrams manifest or each other. Flag in the summary that this run skipped
-  cross-referencing for speed.
+  spawn all generation subagents (teleprompter, diagrams, youtube-meta pass 1,
+  vertical-lift if applicable, newsletter, launch-post, linkedin-posts) in one batch,
+  and tell the newsletter and linkedin-posts agents to derive from `brief.md`
+  directly instead of waiting on the diagrams manifest or each other. Flag in the
+  summary that this run skipped cross-referencing for speed.

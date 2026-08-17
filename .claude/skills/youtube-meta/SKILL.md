@@ -17,7 +17,10 @@ done; never run it automatically as part of `/run-pipeline`.
   actually type. Note the target keyword under each.
 - **Tags**: a set aimed at reaching the right audience.
 - **Thumbnail overlay text**: 3 short options, a few words each, high contrast
-  phrasing.
+  phrasing. If `brief.md` carries a `Thumbnail template` note from the script's
+  metadata line (e.g. "2, diagram-hero, yellow card"), name it above the three
+  options so the overlay text gets matched to the right template, but do not
+  design or describe the template itself, only the text.
 
 Write these into `youtube-meta.md`, then add a clearly marked section:
 `## Description and timestamps (fill after recording)`.

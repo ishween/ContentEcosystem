@@ -17,24 +17,36 @@ has to draw. Text descriptions are a fallback only, used sparingly (see step 3).
 
 ## Steps
 
-1. Read the script and list every point that would be clearer with a visual. For
-   each, note the beat marker (📌) it maps to.
-2. Check `diagrams/source/` for diagrams I have already made. Mark those as
-   "mine, done" in the manifest; do not regenerate them.
-3. For each remaining visual, write `diagrams/generated/<slug-of-concept>.excalidraw`:
-   a real Excalidraw file using the element schema below. Use simple, readable
-   auto-layout: left-to-right or top-to-bottom flow of boxes connected by arrows,
-   labeled text, generous spacing (150-250px gaps) so nothing overlaps. If a diagram
-   is genuinely too intricate for reliable auto-layout (dense multi-branch trees,
-   precise pixel arrangement, anything with more than roughly 8-10 connected shapes),
-   skip the `.excalidraw` file and instead write
-   `diagrams/generated/<slug-of-concept>.md` with an exact shape-by-shape,
-   label-by-label, connection-by-connection description, precise enough to assemble
-   in Excalidraw in a couple of minutes. This is the exception, not the default.
-4. Write `manifest.md` as a table: concept, beat marker, status (mine / generated /
-   generated-as-text-spec), file. This manifest is what the newsletter skill reads,
-   so keep the concept names short and reference-able (for example "evals pipeline",
-   not a full sentence).
+1. Read the script and pull out every production cue, plus anything else that would
+   obviously be clearer with a visual even if uncued:
+   - `{excalidraw — <description>}` cues are authoritative and always get a diagram.
+     The description is the brief for what to draw, use it directly rather than
+     re-guessing the concept from surrounding prose.
+   - `{capture: <url>}` cues are never something to draw. They mean "screenshot this
+     external page here." Do not fabricate a diagram for these, see step 3.
+   - Anything else in the script that would clearly benefit from a visual but has no
+     cue: note it too, but mark it "suggested" in the manifest so it is clearly not
+     something I explicitly asked for.
+2. Check `diagrams/source/` for diagrams I have already made that match a cue or
+   suggestion. Mark those as "mine, done" in the manifest; do not regenerate them.
+3. For each remaining `{excalidraw — ...}` cue or accepted suggestion, write
+   `diagrams/generated/<slug-of-concept>.excalidraw`: a real Excalidraw file using
+   the element schema below. Use simple, readable auto-layout: left-to-right or
+   top-to-bottom flow of boxes connected by arrows, labeled text, generous spacing
+   (150-250px gaps) so nothing overlaps. If a diagram is genuinely too intricate for
+   reliable auto-layout (dense multi-branch trees, precise pixel arrangement,
+   anything with more than roughly 8-10 connected shapes), skip the `.excalidraw`
+   file and instead write `diagrams/generated/<slug-of-concept>.md` with an exact
+   shape-by-shape, label-by-label, connection-by-connection description, precise
+   enough to assemble in Excalidraw in a couple of minutes. This is the exception,
+   not the default.
+   For each `{capture: <url>}` cue, do not generate anything in `generated/`. Record
+   it in the manifest only, status "capture", with the URL in the file column, so it
+   is tracked without being fabricated.
+4. Write `manifest.md` as a table: concept, script section (e.g. "Section 3"),
+   status (mine / generated / generated-as-text-spec / capture / suggested), file or
+   URL. This manifest is what the newsletter skill reads, so keep the concept names
+   short and reference-able (for example "evals pipeline", not a full sentence).
 
 ## Excalidraw file format
 

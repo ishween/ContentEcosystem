@@ -1,9 +1,10 @@
 # Content Pipeline
 
 This repo turns one video script into every downstream content artifact:
-teleprompter copy, diagrams, newsletter, launch post, LinkedIn posts, and YouTube
-metadata. A team of subagents generates these in parallel, each following its own
-skill in `.claude/skills/`. See PLAN.md for the full design.
+teleprompter copy, diagrams, newsletter, launch post, LinkedIn posts, YouTube
+metadata, and short-form vertical spinoffs. A team of subagents generates these in
+parallel, each following its own skill in `.claude/skills/`. See PLAN.md for the
+full design.
 
 ## What lives where
 
@@ -21,8 +22,19 @@ skill in `.claude/skills/`. See PLAN.md for the full design.
   encouraging, plain language. No corporate filler.
 - Keep the reader oriented: lead with the problem or the payoff, not with throat
   clearing.
-- Preserve beat markers written as the pin emoji (📌) in the source script. They mark
-  where a diagram or on-screen moment lands. Never drop them, never invent new ones.
+- Preserve production cues written in scripts as brace or bracket notes. Never drop
+  one, never invent one that was not in the source:
+  - `{excalidraw — <description>}` marks where a diagram lands, with the diagram
+    already briefed by the description.
+  - `{capture: <url>}` marks where a screenshot of an external page lands. This is
+    never something to draw, only something to grab.
+  - `[cross-link: <label>]` marks a reference to another script/video in a series.
+    Never spoken, never a visual cue, just a relationship between scripts.
+  - A trailing `Vertical lift — <label>` block holds short-form (Reels/Shorts/TikTok)
+    spinoff scripts. It is not part of the main video and is handled by its own
+    skill, not the main teleprompter/newsletter/etc pass.
+  - A metadata line near the top (`Runtime target: ...`, `Thumbnail template: ...`)
+    is production planning info, never spoken, but worth carrying into `brief.md`.
 
 ## How to run
 

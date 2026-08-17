@@ -34,9 +34,12 @@ Structure the piece exactly like this:
 
 ## How / Topics
 - Walk through the topics with explanations.
-- Where the diagrams manifest maps a visual to a beat, reference it inline, for
-  example "See diagram: evals pipeline". Do not invent diagrams that are not in the
-  manifest, and do not skip referencing one that is.
+- Where the diagrams manifest maps a visual to a script section, reference it inline,
+  for example "See diagram: evals pipeline". Do not invent diagrams that are not in
+  the manifest, and do not skip referencing one that is. A manifest row with status
+  "capture" is a screenshot, not a diagram; reference it the same way but do not call
+  it a diagram in the text (e.g. "see the AgentCore Memory blog post" rather than
+  "see diagram").
 
 ## Takeaways
 - Summarize the key takeaways as a short list.

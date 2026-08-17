@@ -32,6 +32,7 @@ content-pipeline/
       launch-post/SKILL.md
       linkedin-posts/SKILL.md
       youtube-meta/SKILL.md
+      vertical-lift/SKILL.md
     commands/
       run-pipeline.md            # /run-pipeline
       reflect.md                 # /reflect
@@ -53,6 +54,8 @@ content-pipeline/
         problem-solution-1.md ...
         fomo-1.md ...
       youtube-meta.md
+      vertical-lift/               # only present if the script has a "Vertical
+        the-fail-open-question.md  # lift" block; one file per short-form idea
   feedback/
     published/
       <slug>/                    # my final edited versions, mirroring artifacts/
@@ -78,8 +81,15 @@ told twice.
   encouraging, plain language. No corporate filler.
 - Keep the reader oriented: lead with the problem or the payoff, not with throat
   clearing.
-- Preserve any beat markers written as the pin emoji (📌) in the source script. They
-  mark where a diagram or on-screen moment lands.
+- Preserve production cues written in scripts as brace or bracket notes; never drop
+  or invent one:
+  - `{excalidraw — <description>}` marks where a diagram lands, already briefed.
+  - `{capture: <url>}` marks where a screenshot of an external page lands.
+  - `[cross-link: <label>]` marks a reference to another script in a series.
+  - A trailing `Vertical lift — <label>` block is a short-form spinoff, handled by
+    its own skill, not the main artifacts.
+  - A top-of-script metadata line (`Runtime target: ...`, `Thumbnail template: ...`)
+    is planning info for `brief.md`, never spoken.
 
 ---
 
@@ -101,14 +111,16 @@ others. The pipeline runs in waves. Everything inside a wave runs at the same ti
 
 - **Wave 0, setup** (lead agent, not a subagent): create `artifacts/<slug>/` and its
   subfolders. Read the script and extract a shared brief: the core problem, the
-  target audience, the key takeaways, and any case studies or data points mentioned.
-  Save this as `artifacts/<slug>/brief.md` so downstream agents do not each
-  re-derive it.
+  target audience, the key takeaways, any case studies or data points mentioned, and
+  any top-of-script metadata (runtime target, thumbnail template, cross-links).
+  Note whether a trailing `Vertical lift — <label>` block is present. Save this as
+  `artifacts/<slug>/brief.md` so downstream agents do not each re-derive it.
 
-- **Wave 1, parallel** (three subagents at once):
+- **Wave 1, parallel** (up to four subagents at once):
   - teleprompter skill  -> `teleprompter.md`
   - diagrams skill       -> `diagrams/manifest.md` and `diagrams/generated/`
   - youtube-meta skill   -> `youtube-meta.md` (pre-recording section only)
+  - vertical-lift skill  -> `vertical-lift/*.md`, only if brief.md noted the block
 
 - **Wave 2, parallel** (two subagents at once, start after Wave 1 diagrams finish):
   - newsletter skill   -> `newsletter.md` (references the diagrams manifest)
@@ -150,6 +162,9 @@ frontmatter and body; summarized here:
   (data-driven, case study, problem-to-solution, FOMO takeaways).
 - **youtube-meta**: brief + script -> titles, tags, thumbnail text (pre-recording),
   then description and timestamps (post-recording, deferred).
+- **vertical-lift**: the script's trailing "Vertical lift" block -> one standalone
+  short-form (Reels/Shorts/TikTok) reading script per idea found. Does nothing if
+  the script has no such block.
 
 ---
 
@@ -218,14 +233,14 @@ Nothing below is required for the pipeline to work; these are optional next step
 
 None of these are built into the skills below. Ask for any of them by name when
 ready and they can be added as a new command or a new skill without touching the
-existing six.
+existing seven.
 
 ## Build order
 
 Do these in sequence. Do not build the feedback loop first, because it needs a
 history of my edits to learn from.
 
-1. Create CLAUDE.md, the repo structure, and all six SKILL.md files. (Done.)
+1. Create CLAUDE.md, the repo structure, and all seven SKILL.md files. (Done.)
 2. Create the `/run-pipeline` command. Test it on one real script end to end.
 3. Tune the individual SKILL.md files until the artifacts come out close to what I
    want.
