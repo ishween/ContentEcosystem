@@ -141,8 +141,9 @@ frontmatter and body; summarized here:
 - **diagrams**: script -> manifest of every visual needed, cataloging mine vs.
   Claude-generated diagrams, produced as native `.excalidraw` files (openable
   directly in Excalidraw, no mermaid).
-- **newsletter**: script + brief + diagrams manifest -> Substack/Medium post in
-  What / Why / How / Takeaways structure.
+- **newsletter**: script + brief + diagrams manifest -> one draft in
+  Headline / What / Why / How / Takeaways structure, written to publish on both
+  Substack and LinkedIn Newsletter with no rework.
 - **launch-post**: brief + newsletter -> Title / What / Takeaways / Hashtags
   announcement post.
 - **linkedin-posts**: brief + newsletter -> multiple posts across four angles
@@ -191,11 +192,12 @@ can never permanently warp a skill on its own. It takes a repeated signal.
 
 Nothing below is required for the pipeline to work; these are optional next steps.
 
-- **Hostinger Reach** (already connected in this environment as an MCP server): a
-  contacts/email tool. Once `newsletter.md` is finalized, a subagent could push it as
-  a campaign or sync the audience segment directly, instead of copy-pasting into
-  Substack. Worth wiring as a `/publish-newsletter` command later if newsletters go
-  out through Reach rather than Substack natively.
+- **Substack and LinkedIn Newsletter** are the confirmed distribution targets for
+  `newsletter.md` (see the newsletter skill). Neither has a native MCP connector
+  today, so publishing is copy-paste for now. If that gets tedious, the actual next
+  step is Chrome automation (the `claude-in-chrome` skill available in this
+  environment) driving the Substack and LinkedIn compose flows directly, rather than
+  a different distribution channel.
 - **YouTube Data API** (would need its own MCP connector or a small script): lets the
   post-recording `youtube-meta` pass pull real video duration and, once the video is
   uploaded, lets a follow-up step actually set the title/description/tags instead of
